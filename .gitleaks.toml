@@ -1,0 +1,12 @@
+# Extend gitleaks' default ruleset; allowlist only known-safe example values so
+# the scanner never fires on documentation/test placeholders while still
+# catching real secrets everywhere (including under tests/).
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Known-safe AWS example credentials (used in test fixtures)."
+regexes = [
+  '''AKIAIOSFODNN7EXAMPLE''',
+  '''wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY''',
+]

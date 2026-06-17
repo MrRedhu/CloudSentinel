@@ -1,0 +1,8 @@
+# Runtime dependencies for CloudSentinel.
+# NOTE: in AWS Lambda, boto3 is provided by the runtime — the deployment
+# artifact only needs `anthropic` and `pydantic` (see requirements-lambda.txt,
+# added in Stage B). boto3/click are listed here for local dev + the CLI.
+anthropic>=0.40
+boto3>=1.34
+pydantic>=2.6
+click>=8.1

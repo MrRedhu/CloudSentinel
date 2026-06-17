@@ -1,9 +1,31 @@
+# Secrets / env
 .env
 *.log
-node_modules/
+
+# Python
 __pycache__/
+*.py[cod]
 .venv/
 venv/
+.pytest_cache/
+.ruff_cache/
 dist/
 build/
+*.egg-info/
+
+# Lambda packaging artifacts
+*.zip
+package/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+
+# Editor / OS / local agent state
 .DS_Store
+.claude/
+node_modules/

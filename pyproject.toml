@@ -1,0 +1,17 @@
+[project]
+name = "cloudsentinel"
+version = "0.1.0"
+description = "AI-powered AWS GuardDuty triage: finding -> validated incident brief -> Slack"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 100
+src = ["src", "cli", "eval", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,6 @@
+# Development + test dependencies.
+-r requirements.txt
+pytest>=8.0
+moto[guardduty,dynamodb,cloudtrail,iam,s3,sns]>=5.0
+ruff>=0.6
+pre-commit>=3.7
