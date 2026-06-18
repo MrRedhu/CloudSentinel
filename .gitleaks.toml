@@ -5,8 +5,10 @@
 useDefault = true
 
 [allowlist]
-description = "Known-safe AWS example credentials (used in test fixtures)."
+description = "Known-safe AWS example identifiers (AWS docs/test placeholders containing EXAMPLE)."
 regexes = [
-  '''AKIAIOSFODNN7EXAMPLE''',
+  # Any AWS unique-id-shaped value that contains the EXAMPLE placeholder
+  # (e.g. AKIAIOSFODNN7EXAMPLE, AROAEXAMPLEPRINCIPAL). Real keys never contain it.
+  '''(AKIA|AROA|ASIA|AIDA|AGPA|AIPA|ANPA|ANVA|A3T)[A-Z0-9]*EXAMPLE[A-Z0-9]*''',
   '''wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY''',
 ]

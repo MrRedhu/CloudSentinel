@@ -33,9 +33,3 @@ variable "severity_threshold" {
   type        = number
   default     = 7
 }
-
-variable "dependencies_layer_arn" {
-  description = "Optional Lambda layer ARN providing anthropic+pydantic. Empty until built in Stage B."
-  type        = string
-  default     = ""
-}

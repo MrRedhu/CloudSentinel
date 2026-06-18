@@ -27,7 +27,7 @@ resource "aws_lambda_function" "triage" {
   filename         = data.archive_file.lambda.output_path
   source_code_hash = data.archive_file.lambda.output_base64sha256
 
-  layers = var.dependencies_layer_arn == "" ? [] : [var.dependencies_layer_arn]
+  layers = [aws_lambda_layer_version.deps.arn]
 
   environment {
     variables = {

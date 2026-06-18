@@ -98,6 +98,33 @@ def enrichment() -> dict:
 
 
 @pytest.fixture
+def gd_finding() -> dict:
+    """A GuardDuty finding (GetFindings schema): instance-credential exfiltration."""
+    return {
+        "Id": "2a1b3c4d5e6f7890abcdef1234567890",
+        "Type": "UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.OutsideAWS",
+        "Severity": 8.0,
+        "Title": "Credentials for the EC2 instance role were used from an external IP.",
+        "Region": "us-east-1",
+        "Resource": {
+            "ResourceType": "AccessKey",
+            "AccessKeyDetails": {
+                "AccessKeyId": ACCESS_KEY,
+                "PrincipalId": "AROAEXAMPLEPRINCIPAL:i-0abc123def4567890",
+                "UserType": "AssumedRole",
+                "UserName": "app-server-role",
+            },
+        },
+        "Service": {
+            "EventFirstSeen": "2026-06-18T14:00:00.000Z",
+            "EventLastSeen": "2026-06-18T14:20:00.000Z",
+        },
+        "CreatedAt": "2026-06-18T14:05:00.000Z",
+        "UpdatedAt": "2026-06-18T14:21:00.000Z",
+    }
+
+
+@pytest.fixture
 def brief_factory():
     """Factory to build IncidentBrief instances for validator/client tests."""
 

@@ -90,8 +90,12 @@ def analyze(
     max_tokens: int = MAX_TOKENS,
 ) -> AnalysisResult:
     """Run one Opus 4.8 structured-output analysis of an enrichment bundle."""
-    client = client or get_client()
     sanitized = sanitize(enrichment)
+    try:
+        client = client or get_client()
+    except Exception as exc:  # noqa: BLE001 - missing/unreadable key -> degrade, don't crash
+        logger.warning("Could not initialize Anthropic client: %s", exc)
+        return AnalysisResult(brief=None, degraded=True, reason="client_init_error")
 
     try:
         response = client.messages.parse(
