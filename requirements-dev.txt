@@ -4,3 +4,6 @@ pytest>=8.0
 moto[guardduty,dynamodb,cloudtrail,iam,s3,sns]>=5.0
 ruff>=0.6
 pre-commit>=3.7
+# Needed for local boto3 to load `aws login` (SSO) credentials when running the
+# CLI locally. Not required in CI or Lambda (those use the standard provider chain).
+awscrt>=0.20
