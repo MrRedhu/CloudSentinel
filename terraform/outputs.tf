@@ -3,6 +3,11 @@ output "guardduty_detector_id" {
   value       = aws_guardduty_detector.main.id
 }
 
+output "dashboard_url" {
+  description = "CloudWatch dashboard URL."
+  value       = "https://${var.region}.console.aws.amazon.com/cloudwatch/home?region=${var.region}#dashboards:name=${aws_cloudwatch_dashboard.main.dashboard_name}"
+}
+
 output "lambda_function_name" {
   description = "Name of the triage Lambda."
   value       = aws_lambda_function.triage.function_name
