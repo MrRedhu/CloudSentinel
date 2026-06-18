@@ -94,6 +94,15 @@ def test_no_finding_id(monkeypatch):
     assert result["reason"] == "no_finding_id"
 
 
+def test_camelcase_finding_id_is_accepted(monkeypatch):
+    # EventBridge delivers the finding id as "id", not "Id".
+    analysis = AnalysisResult(brief=None, degraded=True, reason="refusal")
+    _patch(monkeypatch, claim=True, analysis=analysis)
+    result = handler.process({"id": "finding-123"}, config=CONFIG)
+    assert result["status"] == "degraded"  # reached analysis, not skipped
+    assert result["finding_id"] == "finding-123"
+
+
 def test_lambda_handler_unwraps_eventbridge_detail(monkeypatch):
     analysis = AnalysisResult(brief=None, degraded=True, reason="refusal")
     _patch(monkeypatch, claim=True, analysis=analysis)

@@ -100,7 +100,8 @@ def process(finding: dict, *, config: dict | None = None) -> dict:
     config = config or _config()
     start = time.monotonic()
 
-    finding_id = finding.get("Id")
+    # GuardDuty uses "Id" (GetFindings API) or "id" (EventBridge) — accept both.
+    finding_id = finding.get("Id") or finding.get("id")
     if not finding_id:
         return {"status": "skipped", "reason": "no_finding_id"}
 

@@ -110,3 +110,30 @@ def test_enrich_assembles_bundle(gd_finding):
     assert bundle["iam_context"]["blast_radius"] == "CRITICAL"
     assert bundle["related_findings"] == {"count": 0, "summaries": []}
     assert bundle["access_key_id"] is not None
+
+
+def test_parse_finding_eventbridge_camelcase(consts):
+    # GuardDuty delivers findings to EventBridge in camelCase (id/resource/...),
+    # not the PascalCase the GetFindings API uses. The parser must handle both.
+    finding = {
+        "id": "eb-123",
+        "type": "UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.OutsideAWS",
+        "severity": 8.0,
+        "region": "us-east-1",
+        "resource": {
+            "resourceType": "AccessKey",
+            "accessKeyDetails": {
+                "accessKeyId": consts.ACCESS_KEY,
+                "principalId": "AROAEXAMPLEPRINCIPAL:i-0abc",
+                "userType": "AssumedRole",
+                "userName": "app-server-role",
+            },
+        },
+        "service": {"eventLastSeen": "2026-06-18T14:20:00.000Z"},
+    }
+    parsed = parse_finding(finding)
+    assert parsed["finding_id"] == "eb-123"
+    assert parsed["access_key_id"] == consts.ACCESS_KEY
+    assert parsed["user_type"] == "AssumedRole"
+    assert parsed["user_name"] == "app-server-role"
+    assert parsed["center_time"].minute == 20
