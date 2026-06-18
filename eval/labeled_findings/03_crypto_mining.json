@@ -1,0 +1,20 @@
+{
+  "expected_severity": "HIGH",
+  "finding": {
+    "Id": "eval-03",
+    "Type": "CryptoCurrency:EC2/BitcoinTool.B!DNS",
+    "Severity": 8.0,
+    "Title": "EC2 instance is querying a Bitcoin mining pool domain.",
+    "Region": "us-east-1",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0eval123"
+      }
+    },
+    "Service": {
+      "EventFirstSeen": "2026-06-18T10:00:00.000Z",
+      "EventLastSeen": "2026-06-18T10:20:00.000Z"
+    }
+  }
+}

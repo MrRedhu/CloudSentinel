@@ -1,0 +1,23 @@
+{
+  "expected_severity": "HIGH",
+  "finding": {
+    "Id": "eval-02",
+    "Type": "Stealth:IAMUser/CloudTrailLoggingDisabled",
+    "Severity": 8.0,
+    "Title": "CloudTrail logging was disabled.",
+    "Region": "us-east-1",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "AccessKeyId": "AKIAEX1",
+        "PrincipalId": "AROAEX1:sess",
+        "UserType": "AssumedRole",
+        "UserName": "ci-deploy"
+      }
+    },
+    "Service": {
+      "EventFirstSeen": "2026-06-18T10:00:00.000Z",
+      "EventLastSeen": "2026-06-18T10:20:00.000Z"
+    }
+  }
+}

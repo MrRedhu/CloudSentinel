@@ -1,0 +1,23 @@
+{
+  "expected_severity": "MEDIUM",
+  "finding": {
+    "Id": "eval-05",
+    "Type": "UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom",
+    "Severity": 5.0,
+    "Title": "API call from a known malicious IP.",
+    "Region": "us-east-1",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "AccessKeyId": "AKIAEX1",
+        "PrincipalId": "AROAEX1:sess",
+        "UserType": "AssumedRole",
+        "UserName": "analytics-ro"
+      }
+    },
+    "Service": {
+      "EventFirstSeen": "2026-06-18T10:00:00.000Z",
+      "EventLastSeen": "2026-06-18T10:20:00.000Z"
+    }
+  }
+}

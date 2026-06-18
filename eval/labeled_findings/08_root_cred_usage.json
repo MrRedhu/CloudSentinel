@@ -1,0 +1,23 @@
+{
+  "expected_severity": "LOW",
+  "finding": {
+    "Id": "eval-08",
+    "Type": "Policy:IAMUser/RootCredentialUsage",
+    "Severity": 2.0,
+    "Title": "Root account credentials were used.",
+    "Region": "us-east-1",
+    "Resource": {
+      "ResourceType": "AccessKey",
+      "AccessKeyDetails": {
+        "AccessKeyId": "AKIAEX1",
+        "PrincipalId": "AROAEX1:sess",
+        "UserType": "Root",
+        "UserName": "root"
+      }
+    },
+    "Service": {
+      "EventFirstSeen": "2026-06-18T10:00:00.000Z",
+      "EventLastSeen": "2026-06-18T10:20:00.000Z"
+    }
+  }
+}

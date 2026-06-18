@@ -1,0 +1,20 @@
+{
+  "expected_severity": "LOW",
+  "finding": {
+    "Id": "eval-07",
+    "Type": "Recon:EC2/PortProbeUnprotectedPort",
+    "Severity": 2.0,
+    "Title": "Unprotected port probed from the internet.",
+    "Region": "us-east-1",
+    "Resource": {
+      "ResourceType": "Instance",
+      "InstanceDetails": {
+        "InstanceId": "i-0eval123"
+      }
+    },
+    "Service": {
+      "EventFirstSeen": "2026-06-18T10:00:00.000Z",
+      "EventLastSeen": "2026-06-18T10:20:00.000Z"
+    }
+  }
+}
