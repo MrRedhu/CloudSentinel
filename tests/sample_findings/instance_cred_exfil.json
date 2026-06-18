@@ -1,0 +1,72 @@
+{
+  "AccountId": "123456789012",
+  "Arn": "arn:aws:guardduty:us-east-1:123456789012:detector/e3cd6cf3241e499293436122891f73f7/finding/0acf6e853d23a3e745c48c972db85b55",
+  "CreatedAt": "2026-06-18T23:21:51.943Z",
+  "Description": "Credentials created exclusively for an EC2 instance using instance role stratus-red-team-ec2-steal-credentials-role have been used from external IP address 198.51.100.23.",
+  "Id": "0acf6e853d23a3e745c48c972db85b55",
+  "Partition": "aws",
+  "Region": "us-east-1",
+  "Resource": {
+    "AccessKeyDetails": {
+      "AccessKeyId": "ASIAEXAMPLE0000000000RD",
+      "PrincipalId": "AROAEXAMPLE0000000000RD:i-010771724cfa4afd3",
+      "UserName": "stratus-red-team-ec2-steal-credentials-role",
+      "UserType": "AssumedRole"
+    },
+    "InstanceDetails": {
+      "InstanceId": "i-010771724cfa4afd3",
+      "NetworkInterfaces": [],
+      "ProductCodes": [],
+      "Tags": []
+    },
+    "ResourceType": "AccessKey"
+  },
+  "SchemaVersion": "2.0",
+  "Service": {
+    "Action": {
+      "ActionType": "AWS_API_CALL",
+      "AwsApiCallAction": {
+        "Api": "DescribeInstances",
+        "CallerType": "Remote IP",
+        "ErrorCode": "",
+        "RemoteIpDetails": {
+          "City": {
+            "CityName": "Chandler"
+          },
+          "Country": {
+            "CountryName": "United States"
+          },
+          "GeoLocation": {
+            "Lat": 33.3124,
+            "Lon": -111.9195
+          },
+          "IpAddressV4": "198.51.100.23",
+          "Organization": {
+            "Asn": "22773",
+            "AsnOrg": "Cox Communications Inc.",
+            "Isp": "Cox Communications",
+            "Org": "Cox Communications"
+          }
+        },
+        "ServiceName": "ec2.amazonaws.com",
+        "AffectedResources": {}
+      }
+    },
+    "Archived": false,
+    "Count": 1,
+    "DetectorId": "e3cd6cf3241e499293436122891f73f7",
+    "EventFirstSeen": "2026-06-18T22:59:13.000Z",
+    "EventLastSeen": "2026-06-18T22:59:13.000Z",
+    "ResourceRole": "TARGET",
+    "ServiceName": "guardduty",
+    "AdditionalInfo": {
+      "Value": "{\"recentCredentials\":[{\"accessKeyId\":\"ASIAEXAMPLE0000000000RD\",\"principalId\":\"AROAEXAMPLE0000000000RD:i-010771724cfa4afd3\",\"ipAddressV4\":\"198.51.100.23\"}]}",
+      "Type": "default"
+    },
+    "FeatureName": "CloudTrailManagementEvent"
+  },
+  "Severity": 8.0,
+  "Title": "Credentials for instance role stratus-red-team-ec2-steal-credentials-role were used from an external IP address.",
+  "Type": "UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.OutsideAWS",
+  "UpdatedAt": "2026-06-18T23:21:51.943Z"
+}

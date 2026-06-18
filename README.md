@@ -83,7 +83,7 @@ Stratus Red Team.
 
 ```bash
 python cli/cloudsentinel.py analyze --finding-id <id> --detector-id <detector>
-python cli/cloudsentinel.py analyze --file tests/sample_findings/x.json
+python cli/cloudsentinel.py analyze --file tests/sample_findings/instance_cred_exfil.json
 python cli/cloudsentinel.py analyze --finding-id <id> --deliver   # via deployed Lambda
 ```
 
