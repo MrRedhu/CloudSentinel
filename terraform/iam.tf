@@ -36,11 +36,16 @@ data "aws_iam_policy_document" "lambda_permissions" {
     resources = [local.log_group_arn, "${local.log_group_arn}:*"]
   }
 
-  # GuardDuty: read findings on our detector only.
+  # GuardDuty: read findings on our detector only. ListFindings/GetFindings
+  # authorize against the detector's findings sub-resource
+  # (detector/<id>/findings), so the sub-resource ARN must be included too.
   statement {
-    sid       = "GuardDutyRead"
-    actions   = ["guardduty:GetFindings", "guardduty:ListFindings", "guardduty:GetDetector"]
-    resources = [aws_guardduty_detector.main.arn]
+    sid     = "GuardDutyRead"
+    actions = ["guardduty:GetFindings", "guardduty:ListFindings", "guardduty:GetDetector"]
+    resources = [
+      aws_guardduty_detector.main.arn,
+      "${aws_guardduty_detector.main.arn}/*",
+    ]
   }
 
   # CloudTrail LookupEvents has no resource-level permissions (must be "*").
