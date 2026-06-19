@@ -38,6 +38,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
+      - name: Create placeholder Lambda layer artifact
+        # layer.tf's filebase64sha256 reads build/layer.zip at validate time;
+        # the real layer is built before `apply`, so stub it here for validate.
+        run: mkdir -p build && touch build/layer.zip
       - name: Format check
         run: terraform -chdir=terraform fmt -check -recursive
       - name: Init (no backend)

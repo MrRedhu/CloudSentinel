@@ -31,6 +31,51 @@ against the deployed system:
 | Prompt-cache reads (back-to-back) | 7,460 tokens at ~0.1× cost |
 | Tests | **64 passing** (unit + golden + moto integration) |
 
+## Architecture
+
+```mermaid
+flowchart TB
+  GD["GuardDuty finding"] -->|"severity 7+"| EB["EventBridge rule"]
+  EB --> L["Lambda - handler.process"]
+  CLI["CLI - analyze --finding-id"] -. on demand .-> L
+
+  subgraph PIPE["Triage pipeline in the Lambda"]
+    direction TB
+    DG{"dedup gate"} -->|"new"| EN["enrich"]
+    EN --> SAN["sanitize - injection containment"]
+    SAN --> CL["Claude Opus 4.8<br/>structured IncidentBrief"]
+    CL --> VAL["validate + ground<br/>MITRE allowlist, drop hallucinations"]
+    VAL --> RS["re-score severity"]
+    RS --> OUT["deliver"]
+    CL -. refusal or error .-> DEG["degraded - raw context"]
+  end
+
+  L --> DG
+  EN -. read .- CT[("CloudTrail")]
+  EN -. read .- IAMR[("IAM read-only")]
+  DG -. claim/TTL .- DDB1[("DynamoDB dedup")]
+  CL -. get .- SM1{{"Secrets Manager"}}
+
+  OUT --> SLACK["Slack Block Kit"]
+  DEG --> SLACK
+  OUT --> S3[("S3 report - KMS")]
+  OUT --> DDB2[("DynamoDB audit")]
+  OUT --> CW["CloudWatch metrics"]
+```
+
+Stage-by-stage breakdown, trust boundaries, and data stores:
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+## Screenshots
+
+**CloudWatch dashboard** — mean time-to-triage, estimated Claude cost, tokens, and
+triage outcomes:
+
+![CloudWatch dashboard](docs/images/dashboard.png)
+
+A real triaged incident brief (CLI terminal + Slack delivery) is shown in
+[`docs/sample_output.md`](docs/sample_output.md).
+
 ## Why it's defensible (design highlights)
 
 - **Least privilege, no remediation.** The Lambda role can *read* telemetry and
