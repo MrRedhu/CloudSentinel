@@ -68,13 +68,23 @@ Stage-by-stage breakdown, trust boundaries, and data stores:
 
 ## Screenshots
 
+**Real triaged finding (CLI)** — a Stratus Red Team instance-credential theft,
+enriched and analyzed in ~21s. The model read the real CloudTrail + IAM context,
+computed a LOW blast radius, and recognized the `stratus-red-team` user agent as an
+attack-simulation tool (IP / key redacted):
+
+![CLI incident brief](docs/images/cli-brief.png)
+
+**Delivered to Slack** automatically by the Lambda:
+
+![Slack incident brief](docs/images/slack-brief.png)
+
 **CloudWatch dashboard** — mean time-to-triage, estimated Claude cost, tokens, and
 triage outcomes:
 
 ![CloudWatch dashboard](docs/images/dashboard.png)
 
-A real triaged incident brief (CLI terminal + Slack delivery) is shown in
-[`docs/sample_output.md`](docs/sample_output.md).
+The full brief text is in [`docs/sample_output.md`](docs/sample_output.md).
 
 ## Why it's defensible (design highlights)
 
